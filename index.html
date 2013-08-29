@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<link rel="stylesheet" href="style.css" />
+<script>
+var pageurl = "";
+function loadnewpage() {
+
+//		frames[0].location = "http://webcache.googleusercontent.com/search?q=cache:"+pageurl.inputbox.value+"+&cd=1&hl=en&ct=clnk&gl=us";
+//    this should work, but doesn't because Google doesn't allow other sites to load Google in iframes.
+
+				frames[0].location = document.getElementById("inputbox").value;
+				//just load the URL instead (will be removed once I can find a way around the iframe nonsense)
+}
+
+function stopRKey(evt) {  //handle when the user hits enter
+  var evt = (evt) ? evt : ((event) ? event : null);
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if ((evt.keyCode == 13) && (node.type=="text")) {loadnewpage();}
+}
+
+document.onkeypress = stopRKey;
+
+</script>
+<body>
+<div id="banner">Page to browse Google's cache of: 
+		<input type="text" id="inputbox" value="">
+		<input type="button" value="load" onClick="loadnewpage()">
+</div>
+<iframe seamless src="" id="content"></iframe>
+</body>
+</html>
